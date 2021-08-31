@@ -9,26 +9,20 @@ import {
     useDisclosure,
     DrawerHeader
 } from '@chakra-ui/react';
-import {
-    GoCalendar,
-    GoGrabber,
-    GoListUnordered,
-    GoTasklist
-} from 'react-icons/go';
-import { IconType } from 'react-icons';
+import { GoGrabber } from 'react-icons/go';
 
 import './Menu.scss';
 
 interface MenuItem {
-    icon: IconType;
     name: string;
     route: string;
 };
 
 const menuItems: MenuItem[] = [
-    { name: 'All Tasks', icon: GoListUnordered, route: '/AllTasks' },
-    { name: 'Calendar', icon: GoCalendar, route: '/Calendar' },
-    { name: 'Completed Tasks', icon: GoTasklist, route: '/Completed' }
+    { name: 'Weeks Tasks', route: '/Weekly' },
+    { name: 'All Tasks', route: '/AllTasks' },
+    { name: 'Calendar', route: '/Calendar' },
+    { name: 'Completed Tasks', route: '/Completed' }
 ];
 
 export const Menu = ():JSX.Element => {
@@ -47,7 +41,6 @@ export const Menu = ():JSX.Element => {
             <>
                 {menuItems.map((row) => 
                     <a key={`menu-item-${row.name}`} className={`menu-item menu-item-${row.name}`} onClick={() => handleMenuItemClick(row.route)}>
-                        <row.icon aria-hidden={true}/>
                         <p>{row.name}</p>
                     </a>
                 )}

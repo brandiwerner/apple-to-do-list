@@ -1,11 +1,11 @@
 import React from 'react';
 import { CreateTask } from '../../Components/CreateTask/CreateTask';
 
-export const Calendar = ():JSX.Element => {
+export const WeeklyTasks = ():JSX.Element => {
     return (
         <>
-            <div> Coming Soon!</div>
-            <CreateTask />
+            <div>Weekly Coming Soon!</div>
+            <CreateTask />        
         </>
     );
 }
