@@ -1,7 +1,9 @@
-.create-task-button {
+.chakra-button {
+  &.create-task-button {
     position: fixed;
     bottom: 30px;
     right: 30px;
     border-radius: 50%;
     min-height: 48px;
+  }
 }

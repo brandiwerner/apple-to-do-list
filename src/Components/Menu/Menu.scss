@@ -1,26 +1,26 @@
 .menu-button {
-    font-size: 3rem;
-    margin: 7px;
+  font-size: 3rem;
+  margin: 7px;
 }
 
 .menu-content {
+  display: flex;
+  flex-direction: column;
+
+  .menu-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    margin: 3px;
+    border-radius: 8px;
 
-    .menu-item {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 12px;
-        margin: 3px;
-        border-radius: 25px;
-
-        &:hover {
-            background-color: aquamarine;
-        }
-
-        svg {
-            margin-right: 20px;
-        }
+    &:hover {
+      background-color: #68D391;
     }
+
+    svg {
+      margin-right: 20px;
+    }
+  }
 }

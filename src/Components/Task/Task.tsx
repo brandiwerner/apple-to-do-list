@@ -1,54 +1,149 @@
-import React, { useState } from 'react';
-import { GrFormTrash } from 'react-icons/gr';
-import { Box, Checkbox, Text } from '@chakra-ui/react';
+import { useState } from "react";
+import { GrFormTrash } from "react-icons/gr";
+import { Box, Checkbox, Text, useToast } from "@chakra-ui/react";
+import { useMutation, useQueryClient } from "react-query";
 
-import './Task.scss';
+import { deleteTodo, updateTodo } from "../../Services/TodoService";
 
-enum Priority{
-    Low = 1,
-    Medium,
-    High
-};
+import "./Task.scss";
+
+export enum Priority {
+  Low = "Low",
+  Medium = "Medium",
+  High = "High",
+}
 
 export interface TaskItem {
-    text: string,
-    isComplete: boolean,
-    priority: Priority
-};
-
-export const Task = (props: TaskItem):JSX.Element => {
-    const { text, isComplete, priority } = props;
-
-    // TODO: Determine if isCompleted via database
-    const [completed, setCompleted] = useState<boolean>(isComplete);
-
-    /**
-     * Set styling of task item when box is toggled
-     * TODO: Make call to API to update status of checkbox
-     */
-    const toggleCheckbox = (isChecked: boolean):void => {
-        setCompleted(isChecked);
-    }
-
-    return (
-        <Box
-            className="task-item"
-            maxW="sm"
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            p={4} bg={completed ? 'gray.50' : ''}
-        >
-            <div className="task-start-content">
-                <Checkbox
-                    className={`checkbox-priority-${priority}`}
-                    size="lg"
-                    colorScheme="cyan"
-                    onChange={(e) => toggleCheckbox(e.target.checked)}
-                />
-                <Text className={completed ? 'completed-text' : ''}>{text}</Text>                
-            </div>
-            <GrFormTrash className='trashcan'/> 
-        </Box>
-    );
+  description: string;
+  isComplete: boolean;
+  priority: Priority;
+  id: string;
+  dueDate: string;
 }
+
+export const Task = (props: TaskItem): JSX.Element => {
+  const { id, description, isComplete, priority } = props;
+  const queryClient = useQueryClient();
+
+  const toast = useToast();
+  const [completeToastShown, setCompleteToastShown] = useState<boolean>(false);
+  const [deleteToastShown, setDeleteToastShown] = useState<boolean>(false);
+
+  const setOutlineColor = (): string[] => {
+    switch (priority) {
+      case "Low":
+        return ["green.300", "green"];
+      case "Medium":
+        return ["orange.300", "orange"];
+      default:
+        return ["red.600", "red"];
+    }
+  };
+  let [outlineColor, fillColor] = setOutlineColor();
+
+  const showCompleteToast = (): void => {
+    toast({
+      title: "Error Marking Complete.",
+      description: "There was an error completing this todo.",
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+      position: "top",
+    });
+
+    setCompleteToastShown(true);
+  };
+
+  const showDeleteToast = (): void => {
+    toast({
+      title: "Error Deleting.",
+      description: "There was an error deleting the todo.",
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+      position: "top",
+    });
+
+    setDeleteToastShown(true);
+  };
+
+  /**
+   * Make API call to delete task
+   */
+  const {
+    error: deleteError,
+    isLoading: deleteIsLoading,
+    mutate: deleteMutate,
+  } = useMutation(
+    "todos",
+    async () => {
+      const data = await deleteTodo(id);
+      console.log(JSON.stringify(data, null, 2));
+      return data;
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries("todos");
+      },
+    }
+  );
+
+  /**
+   * Make API call to update complete status of task
+   */
+  const {
+    error: completeError,
+    isLoading: completeIsLoading,
+    mutate: completeMutate,
+  } = useMutation(
+    "todos",
+    async (isComplete: boolean) => {
+      const data = await updateTodo({ id, isComplete: isComplete });
+      console.log(JSON.stringify(data, null, 2));
+      return data;
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries("todos");
+      },
+    }
+  );
+
+  return (
+    <>
+      {completeError && !completeToastShown && showCompleteToast()}
+      {deleteError && !deleteToastShown && showDeleteToast()}
+      <Box
+        className="task-item"
+        maxW="sm"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        p={4}
+        bg={isComplete ? "gray.50" : ""}
+      >
+        <div className="task-start-content">
+          <Checkbox
+            className={`checkbox-priority-${priority}`}
+            size="lg"
+            colorScheme={fillColor}
+            borderColor={outlineColor}
+            defaultIsChecked={isComplete}
+            onChange={(e) => {
+              // toggleCheckbox(e.target.checked);
+              completeMutate(!isComplete);
+            }}
+            m={1}
+            mr={3}
+          />
+          <Text className={isComplete ? "completed-text" : ""}>
+            {description}
+          </Text>
+        </div>
+        <GrFormTrash className="trashcan" onClick={() => deleteMutate()} />
+      </Box>
+    </>
+  );
+};
