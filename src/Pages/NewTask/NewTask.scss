@@ -1,44 +1,75 @@
 .new-task {
-    flex-grow: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: start;
+
+  .new-task-content {
+    flex-grow: 4;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    text-align: start;
+    max-width: 80vw;
+    margin: auto;
 
-    .new-task-content {
-        flex-grow: 4;
-        max-width: 80vw;
-        margin: auto;
+    .form-item {
+      padding-bottom: 10px;
+      padding-top: 10px;
 
-        .form-item {
-            padding-bottom: 10px;
-            padding-top: 10px;
+      .chakra-heading {
+        margin: 10px;
+      }
 
-            .chakra-heading {
-                margin: 10px;
-            }
-    
-            .form-error {
-                color: #C53030;
-            }
-    
-            .chakra-radio-group {
-                margin: 5px;
-                .chakra-stack {
-                    justify-content: space-around;
-                }
-            }
-    
-            .react-datepicker__input-container input {
-                border-color: rgb(226, 232, 240);
-                border-width: 1px;
-                border-radius: var(--chakra-radii-md);
-                padding: 5px;
-            }
+      .form-error {
+        color: #c53030;
+      }
+
+      .chakra-radio-group {
+        margin: 5px;
+        .chakra-stack {
+          justify-content: space-around;
         }
-    }
+      }
 
-    input {
-        flex: 1;
+      .react-datepicker__input-container input {
+        border-color: rgb(226, 232, 240);
+        border-width: 1px;
+        border-radius: var(--chakra-radii-md);
+        padding: 5px;
+      }
     }
+  }
+
+  input {
+    flex: 1;
+  }
+
+  .spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .form-submit-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 20px;
+    margin-bottom: 35px;
+
+    .form-submit {
+      max-width: 50vw;
+      min-height: 40px;
+      border-radius: var(--chakra-radii-md);
+
+      &.submit-enabled {
+        background: #68D391;
+      }
+    }
+  }
+}
+
+.top-heading {
+  margin-bottom: 20px;
 }

@@ -12,7 +12,6 @@ import './App.scss';
 import { AllTasks } from './Pages/AllTasks/AllTasks';
 import { Calendar } from './Pages/Calendar/Calendar';
 import { Completed } from './Pages/Completed/Completed';
-import { WeeklyTasks } from './Pages/WeeklyTasks/WeeklyTasks';
 import { NewTask } from "./Pages/NewTask/NewTask";
 import { Menu } from './Components/Menu/Menu';
 
@@ -26,8 +25,7 @@ function App() {
           <BrowserRouter>
             <Menu />
             <Switch>
-              <Route path='/' exact > <WeeklyTasks /> </Route>
-              <Route path='/Weekly' exact > <WeeklyTasks /> </Route>
+              <Route path='/' exact > <AllTasks /> </Route>
               <Route path='/AllTasks' exact > <AllTasks /> </Route>
               <Route path='/Calendar' exact > <Calendar /> </Route>
               <Route path='/Completed' exact > <Completed /> </Route>
