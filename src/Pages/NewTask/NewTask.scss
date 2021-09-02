@@ -1,0 +1,44 @@
+.new-task {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: start;
+
+    .new-task-content {
+        flex-grow: 4;
+        max-width: 80vw;
+        margin: auto;
+
+        .form-item {
+            padding-bottom: 10px;
+            padding-top: 10px;
+
+            .chakra-heading {
+                margin: 10px;
+            }
+    
+            .form-error {
+                color: #C53030;
+            }
+    
+            .chakra-radio-group {
+                margin: 5px;
+                .chakra-stack {
+                    justify-content: space-around;
+                }
+            }
+    
+            .react-datepicker__input-container input {
+                border-color: rgb(226, 232, 240);
+                border-width: 1px;
+                border-radius: var(--chakra-radii-md);
+                padding: 5px;
+            }
+        }
+    }
+
+    input {
+        flex: 1;
+    }
+}
