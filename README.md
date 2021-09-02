@@ -35,3 +35,4 @@ The created todo page can be accessed via the `+` button on all the pages. The c
 * Implement Complete View
 * Implement Calendar View
 * Implement Tests
+* Fix double toast error displaying
