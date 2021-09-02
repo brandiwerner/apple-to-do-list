@@ -12,10 +12,12 @@ export const TaskList = ({tasks}: TaskListProps):JSX.Element => {
             <>
                 {tasks.map((task, index) => 
                     <Task
-                        key={`${task.text}-${index}`}
-                        text={task.text}
+                        key={`${task.id}-${index}`}
+                        description={task.description}
                         isComplete={task.isComplete}
                         priority={task.priority}
+                        dueDate={task.dueDate}
+                        id={task.id}
                     />
                 )}
             </>

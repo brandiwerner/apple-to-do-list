@@ -9,20 +9,25 @@
         display: flex;
         justify-content: start;
 
-        .chakra-checkbox {
-            margin-right: 20px;
-            font-weight: bold;
-
-            &.checkbox-priority-3 {
-                border-color: #C53030;
-            }
-
-            &.checkbox-priority-2 {
-                border-color: #F6AD55;
-            }
-
-            &.checkbox-priority-1 {
-                border-color: #68D391;
+        .hakra-checkbox__control {
+            border-color: #C53030;
+        }
+        .chakra-stack {
+            &.chakra-checkbox {
+                margin-right: 20px;
+                font-weight: bold;
+    
+                &.checkbox-priority-3 {
+                    border-color: #C53030;
+                }
+    
+                &.checkbox-priority-2 {
+                    border-color: #F6AD55;
+                }
+    
+                &.checkbox-priority-1 {
+                    border-color: #68D391;
+                }
             }
         }
 
