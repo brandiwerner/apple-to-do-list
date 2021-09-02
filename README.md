@@ -1,3 +1,8 @@
+The purpose of this todo app to simply showcase and explore different aspects and technologies for fullstack development in a Node.js environment. This includes,
+- frontend development with React, Typescript, and ecosystem
+- backend development with Node.js, Typescript, and ecosystem,
+- database setup, and more.
+
 # Description
 
 This project is a todo application which allows users to create task items. These task items will contain a description, due date, and priority (High, Low, Medium). The API for this todo list can be found [here](https://github.com/brandiwerner/todo-api).
@@ -36,3 +41,5 @@ The created todo page can be accessed via the `+` button on all the pages. The c
 * Implement Calendar View
 * Implement Tests
 * Fix double toast error displaying
+* User sessions and authentication
+* docker and docker-compose implementation
