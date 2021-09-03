@@ -12,13 +12,11 @@ export const Completed = (): JSX.Element => {
   const [toastShown, setToastShown] = useState<boolean>(false);
 
 
-  const { data, error, isLoading, isFetching } = useQuery("todos", async () => {
+  const { data, error, isLoading } = useQuery("todos", async () => {
     const data = await getTodos();
 
     // Filter out only the completed tasks
     const completedData = data.filter((todo: TaskItem)  => todo.isComplete);
-
-    console.log(completedData)
     return completedData;
   });
 

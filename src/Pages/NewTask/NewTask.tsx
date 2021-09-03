@@ -7,7 +7,6 @@ import {
   Stack,
   Text,
   Spinner,
-  Button,
   useToast,
 } from "@chakra-ui/react";
 import { useForm, Controller } from "react-hook-form";
@@ -84,7 +83,6 @@ export const NewTask = (): JSX.Element => {
       if (data) {
         history.goBack();
       }
-      console.log(JSON.stringify(data, null, 2));
       return data;
     }
   );

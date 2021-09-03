@@ -74,13 +74,11 @@ export const Task = (props: TaskItem): JSX.Element => {
    */
   const {
     error: deleteError,
-    isLoading: deleteIsLoading,
     mutate: deleteMutate,
   } = useMutation(
     "todos",
     async () => {
       const data = await deleteTodo(id);
-      console.log(JSON.stringify(data, null, 2));
       return data;
     },
     {
@@ -96,13 +94,11 @@ export const Task = (props: TaskItem): JSX.Element => {
    */
   const {
     error: completeError,
-    isLoading: completeIsLoading,
     mutate: completeMutate,
   } = useMutation(
     "todos",
     async (isComplete: boolean) => {
       const data = await updateTodo({ id, isComplete: isComplete });
-      console.log(JSON.stringify(data, null, 2));
       return data;
     },
     {

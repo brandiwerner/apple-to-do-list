@@ -14,7 +14,6 @@ export const AllTasks = (): JSX.Element => {
 
   const { data, error, isLoading } = useQuery("todos", async () => {
     const data = await getTodos();
-    console.log(data)
     return data;
   });
 

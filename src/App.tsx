@@ -15,11 +15,9 @@ import { useIsFetching } from "react-query";
 import { Box } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 
-
 function App() {
 
   const isFetching = useIsFetching()
-
 
   return (
         <div className="App">
