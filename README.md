@@ -35,11 +35,17 @@ The created todo page can be accessed via the `+` button on all the pages. The c
 3. Run application via `npm run start`
 4. Open browser to `http://localhost:3000/`
 
-## Future Implementations
+## Known Issues
+* Several A11y Issues
+* 2 Toast errors are being displayed instead of one
 
-* Implement Complete View
-* Implement Calendar View
+## Future Implementations/Work
+
 * Implement Tests
-* Fix double toast error displaying
-* User sessions and authentication
-* docker and docker-compose implementation
+* Add a legend for task coloring
+* Add user sessions and authentication
+* Docker and docker-compose implementation
+* Add pull to refresh. 
+  * This will allow the user to quickly refresh the data if an error occurs
+* Add aging for completed tasks.
+  * Once a complete task's age surpasses a specified threshhold perminently delete it. Potentially change the Completed page to a 'Completed within the last week' page.
