@@ -41,6 +41,7 @@ export const Menu = (): JSX.Element => {
             key={`menu-item-${row.name}`}
             className={`menu-item menu-item-${row.name}`}
             onClick={() => handleMenuItemClick(row.route)}
+            href={row.route}
           >
             <p>{row.name}</p>
           </a>

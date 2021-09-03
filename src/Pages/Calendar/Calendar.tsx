@@ -55,7 +55,7 @@ export const Calendar = (): JSX.Element => {
         calendarDay?.classList.add('task-day');
       })
     }
-  }, [selectedDate, daysWithTodosInMonth]);
+  }, [selectedDate, daysWithTodosInMonth, data]);
 
   const showToast = (): void => {
     toast({
@@ -77,14 +77,17 @@ export const Calendar = (): JSX.Element => {
     if (data) {
       const calendarDays = document.querySelectorAll('.react-datepicker__day:not(.react-datepicker__day--outside-month');
 
-      let taskDayList: number[] = [];
       let todoDate;
-      data.map((todo: TaskItem) => {
+      const taskDayList = data.filter((todo: TaskItem) => {
         todoDate = new Date(todo.dueDate);
         if (todoDate.getMonth() === monthShown) {
           calendarDays[todoDate.getDate() - 1].classList.add('task-day');
-          taskDayList.push(todoDate.getDate());
+          return true;
         }
+        return false;
+      }).map((todo:TaskItem) => {
+        todoDate = new Date(todo.dueDate);
+        return todoDate.getDate();
       });     
 
       setDaysWithTodosInMonth(taskDayList);

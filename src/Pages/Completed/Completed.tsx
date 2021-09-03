@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heading, Spinner, useToast, Container, Text, Box } from "@chakra-ui/react";
+import { Heading, Spinner, useToast, Container, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
 import { TaskList } from "../../Components/TaskList/TaskList";
