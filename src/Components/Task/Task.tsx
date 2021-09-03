@@ -22,8 +22,10 @@ export interface TaskItem {
 }
 
 export const Task = (props: TaskItem): JSX.Element => {
-  const { id, description, isComplete, priority } = props;
+  const { id, description, isComplete, priority, dueDate } = props;
   const queryClient = useQueryClient();
+  const date = new Date(dueDate);
+  const displayDate = date.toDateString();
 
   const toast = useToast();
   const [completeToastShown, setCompleteToastShown] = useState<boolean>(false);
@@ -126,7 +128,7 @@ export const Task = (props: TaskItem): JSX.Element => {
       >
         <div className="task-start-content">
           <Checkbox
-            className={`checkbox-priority-${priority}`}
+            className={`checkbox-priority-${priority} task-checkbox`}
             size="lg"
             colorScheme={fillColor}
             borderColor={outlineColor}
@@ -138,9 +140,14 @@ export const Task = (props: TaskItem): JSX.Element => {
             m={1}
             mr={3}
           />
-          <Text className={isComplete ? "completed-text" : ""}>
-            {description}
-          </Text>
+          <div className='task-text-container'>
+            <Text className={isComplete ? "completed-text" : ""} align='left'>
+              {description}
+            </Text>
+            <Text className={isComplete ? "completed-text" : ""} fontSize="xs" align='left'>
+              {displayDate}
+            </Text>
+          </div>
         </div>
         <GrFormTrash className="trashcan" onClick={() => deleteMutate()} />
       </Box>

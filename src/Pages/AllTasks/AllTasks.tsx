@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heading, Spinner, useToast, Container  } from "@chakra-ui/react";
+import { Heading, Spinner, useToast, Container, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
 import { TaskList } from "../../Components/TaskList/TaskList";
@@ -14,12 +14,13 @@ export const AllTasks = (): JSX.Element => {
 
   const { data, error, isLoading } = useQuery("todos", async () => {
     const data = await getTodos();
+    console.log(data)
     return data;
   });
 
   const showToast = (): void => {
     toast({
-      title: "Error Loading.",
+      title: "Error Loading Data.",
       description: "There was an error loading the todos.",
       status: "error",
       duration: 9000,
@@ -29,6 +30,20 @@ export const AllTasks = (): JSX.Element => {
 
     setToastShown(true);
   };
+
+  const renderData = ():JSX.Element | null => {
+    if (data) {
+      if (Array.isArray(data) && data.length > 0) {
+        return <TaskList tasks={data} /> 
+      } 
+    }
+    
+    if (isLoading) {
+      return null
+    } else {
+      return <Text m={3}>No task to display.</Text>
+    }
+  }
 
   return (
     <>
@@ -46,10 +61,8 @@ export const AllTasks = (): JSX.Element => {
         </div>
       )}
       <Container maxW="container.md">
-        {data ? <TaskList tasks={data} /> : null}   
+        {renderData()}
       </Container>
-      
-
       <CreateTask />
     </>
   );

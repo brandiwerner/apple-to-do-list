@@ -3,9 +3,6 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from 'react-query'
-
-import { ChakraProvider } from "@chakra-ui/react"
 
 import './App.scss';
 
@@ -14,16 +11,25 @@ import { Calendar } from './Pages/Calendar/Calendar';
 import { Completed } from './Pages/Completed/Completed';
 import { NewTask } from "./Pages/NewTask/NewTask";
 import { Menu } from './Components/Menu/Menu';
+import { useIsFetching } from "react-query";
+import { Box } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
 
-const queryClient = new QueryClient()
 
 function App() {
+
+  const isFetching = useIsFetching()
+
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
         <div className="App">
           <BrowserRouter>
             <Menu />
+            {isFetching > 0 ? (
+              <Box position="fixed" top="3" right="3">
+                <Spinner size="xs" />
+              </Box>
+            ) : null}
             <Switch>
               <Route path='/' exact > <AllTasks /> </Route>
               <Route path='/AllTasks' exact > <AllTasks /> </Route>
@@ -34,8 +40,6 @@ function App() {
             </Switch>
           </BrowserRouter>
         </div>
-      </ChakraProvider>
-    </QueryClientProvider>
   );
 }
 

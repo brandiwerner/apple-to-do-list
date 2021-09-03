@@ -8,35 +8,18 @@
   .task-start-content {
     display: flex;
     justify-content: start;
+    align-items: flex-start;
 
-    .hakra-checkbox__control {
-      border-color: #c53030;
-    }
-    .chakra-stack {
-      &.chakra-checkbox {
-        margin-right: 20px;
-        font-weight: bold;
-
-        &.checkbox-priority-3 {
-          border-color: #c53030;
-        }
-
-        &.checkbox-priority-2 {
-          border-color: #f6ad55;
-        }
-
-        &.checkbox-priority-1 {
-          border-color: #68d391;
-        }
+    .task-text-container {
+      .completed-text {
+        text-decoration: line-through;
       }
-    }
 
-    .completed-text {
-      text-decoration: line-through;
     }
   }
 
   svg.trashcan {
     font-size: 30px;
+    flex-shrink: 0;
   }
 }
